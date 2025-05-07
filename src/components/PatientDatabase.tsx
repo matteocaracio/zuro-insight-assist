@@ -646,10 +646,7 @@ Observações adicionais: Os exames mostram melhora na condição inflamatória,
                         <div className="flex justify-end gap-2">
                           <Dialog>
                             <DialogTrigger asChild>
-                              <Button variant="outline" size="sm" className="h-8">
-                                <FileEdit className="h-4 w-4 mr-1" />
-                                Ver Notas
-                              </Button>
+                              
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-md">
                               <DialogHeader>
