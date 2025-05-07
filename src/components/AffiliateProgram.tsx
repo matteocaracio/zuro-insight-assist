@@ -1,17 +1,10 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Copy, ArrowRight, Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { 
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
-
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 const AffiliateProgram = () => {
   const [userId] = useState('USR123456'); // In a real app, this would come from auth context
   const [affiliateLink] = useState(`https://zuroagenda.com/ref/${userId}`);
@@ -22,19 +15,17 @@ const AffiliateProgram = () => {
     conversionRate: '10.08%',
     pendingPayment: 'R$ 320,00'
   });
-  
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     toast({
       title: "Link copiado!",
-      description: "Link de afiliado copiado para a área de transferência.",
+      description: "Link de afiliado copiado para a área de transferência."
     });
   };
-  
-  return (
-    <div className="space-y-8">
+  return <div className="space-y-8">
       <div>
         <h2 className="text-2xl font-bold text-gray-800">Programa de Afiliados</h2>
         <p className="mt-2 text-gray-600">
@@ -56,10 +47,7 @@ const AffiliateProgram = () => {
               <div className="bg-gray-100 text-gray-800 rounded-lg p-3 text-sm flex-1 truncate">
                 {affiliateLink}
               </div>
-              <Button 
-                onClick={() => copyToClipboard(affiliateLink)} 
-                className="bg-zuro hover:bg-zuro-dark text-white"
-              >
+              <Button onClick={() => copyToClipboard(affiliateLink)} className="bg-zuro hover:bg-zuro-dark text-white">
                 <Copy className="h-4 w-4 mr-2" />
                 Copiar
               </Button>
@@ -82,7 +70,7 @@ const AffiliateProgram = () => {
                 <p className="text-2xl font-bold text-gray-900">{stats.clicks}</p>
               </div>
               <div className="space-y-1">
-                <p className="text-sm text-gray-500">Cadastros</p>
+                <p className="text-sm text-gray-500">Conversão</p>
                 <p className="text-2xl font-bold text-gray-900">{stats.signups}</p>
               </div>
               <div className="space-y-1">
@@ -95,64 +83,14 @@ const AffiliateProgram = () => {
               </div>
             </div>
           </CardContent>
-          <CardFooter className="border-t bg-gray-50 flex justify-between">
-            <div className="text-sm">
-              <span className="text-gray-500">Pendente:</span> <span className="font-medium">{stats.pendingPayment}</span>
-            </div>
-            <Button variant="link" className="text-zuro p-0">
-              Ver histórico completo
-              <ArrowRight className="ml-1 h-3 w-3" />
-            </Button>
-          </CardFooter>
+          
         </Card>
       </div>
       
       {/* Marketing Materials */}
       <Card className="shadow-md">
-        <CardHeader>
-          <CardTitle>Materiais de Divulgação</CardTitle>
-          <CardDescription>
-            Utilize estes materiais para potencializar suas campanhas de afiliado.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {["Banner Padrão", "Post Instagram", "E-mail Marketing", "Descrição para Bio"].map((item, i) => (
-              <Card key={i} className="overflow-hidden">
-                <div className="h-36 bg-gray-200 flex items-center justify-center">
-                  <img 
-                    src={`https://placehold.co/300x150/6F4FF2/FFFFFF/svg?text=Material ${i+1}`}
-                    alt={`Material ${i+1}`}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="p-3">
-                  <h4 className="font-medium text-gray-900">{item}</h4>
-                  <div className="flex mt-2">
-                    <Button variant="outline" size="sm" className="text-xs mr-2">
-                      <Copy className="h-3 w-3 mr-1" /> Copiar
-                    </Button>
-                    <Button variant="outline" size="sm" className="text-xs">
-                      Download
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-            ))}
-            <Card className="overflow-hidden bg-gray-50 border-dashed border-2 border-gray-300">
-              <div className="h-full flex flex-col items-center justify-center p-6 text-center">
-                <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center mb-3">
-                  <Plus className="h-5 w-5 text-gray-500" />
-                </div>
-                <h4 className="font-medium text-gray-700">Solicitar Material Personalizado</h4>
-                <p className="text-xs text-gray-500 mt-1">Precisa de algo específico?</p>
-                <Button variant="ghost" size="sm" className="mt-3 text-xs text-zuro">
-                  Fazer solicitação
-                </Button>
-              </div>
-            </Card>
-          </div>
-        </CardContent>
+        
+        
       </Card>
       
       {/* How To Guide */}
@@ -215,8 +153,6 @@ const AffiliateProgram = () => {
           </p>
         </CardFooter>
       </Card>
-    </div>
-  );
+    </div>;
 };
-
 export default AffiliateProgram;
