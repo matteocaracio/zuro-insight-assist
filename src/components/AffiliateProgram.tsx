@@ -131,17 +131,13 @@ const AffiliateProgram = () => {
               <AccordionTrigger className="text-left">Como receber pagamentos</AccordionTrigger>
               <AccordionContent>
                 <div className="space-y-2 text-gray-700">
-                  <p>
-                    Os pagamentos são realizados até o dia 15 de cada mês, referentes às comissões do mês anterior. Você pode escolher receber via:
-                  </p>
+                  <p>Os pagamentos são realizados até o dia 20 de cada mês, referentes às devidas comissões, você vai receber via:</p>
                   <ul className="list-disc list-inside pl-2">
                     <li>Transferência bancária (Pix)</li>
-                    <li>Créditos na plataforma</li>
-                    <li>PayPal</li>
+                    
+                    
                   </ul>
-                  <p className="mt-2">
-                    Configure seu método de pagamento preferido na seção "Financeiro" do seu painel.
-                  </p>
+                  <p className="mt-2">Obtenha seu pagamento após 30 dias da compra e entre em contato via suporte para receber!</p>
                 </div>
               </AccordionContent>
             </AccordionItem>
