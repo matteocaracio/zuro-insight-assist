@@ -105,7 +105,7 @@ const AffiliateProgram = () => {
               <AccordionContent>
                 <div className="space-y-2 text-gray-700">
                   <p>O Programa de Afiliados da ZuroAgenda oferece 100% de comissão referente o primeiro pagamento para cada novo usuário que se cadastrar através do seu link de indicação. As comissões são pagas mensalmente após 30 dias da compra.</p>
-                  <p>Seu link de afiliado possui um cookie com validade de 30 dias, ou seja, se alguém clicar no seu link e realizar a assinatura após 30 dias, você receberá a comissão.</p>
+                  <p>Seu link de afiliado possui um cookie com validade de 5 dias, ou seja, se alguém clicar no seu link e realizar a assinatura após 30 dias, você receberá a comissão.</p>
                 </div>
               </AccordionContent>
             </AccordionItem>
