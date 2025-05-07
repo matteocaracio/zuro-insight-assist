@@ -10,7 +10,8 @@ import {
   SidebarGroupContent,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarFooter
+  SidebarFooter,
+  useSidebar
 } from '@/components/ui/sidebar';
 import { Book, Settings, FileText, Users, Copy, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -32,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-zuro-background">
-        <Sidebar className="border-r border-gray-200 bg-white" collapsed={collapsed}>
+        <Sidebar className="border-r border-gray-200 bg-white">
           <div className="p-4">
             <Link to="/" className="flex items-center">
               <img 
@@ -71,7 +72,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <Button 
                 variant="outline" 
                 size="sm" 
-                onClick={() => setCollapsed(!collapsed)}
+                onClick={() => {
+                  setCollapsed(!collapsed);
+                }}
                 className="w-full justify-start"
               >
                 <ArrowRight className={cn(
