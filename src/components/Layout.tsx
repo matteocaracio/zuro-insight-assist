@@ -30,9 +30,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   ];
 
   return (
-    <SidebarProvider defaultCollapsed={collapsed}>
+    <SidebarProvider>
       <div className="min-h-screen flex w-full bg-zuro-background">
-        <Sidebar className="border-r border-gray-200 bg-white">
+        <Sidebar className="border-r border-gray-200 bg-white" collapsed={collapsed}>
           <div className="p-4">
             <Link to="/" className="flex items-center">
               <img 
