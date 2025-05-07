@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Copy, ArrowRight, Plus } from 'lucide-react';
+import { Copy, ArrowRight, Plus, CreditCard } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+
 const AffiliateProgram = () => {
   const [userId] = useState('USR123456'); // In a real app, this would come from auth context
   const [affiliateLink] = useState(`https://zuroagenda.com/ref/${userId}`);
@@ -18,6 +19,7 @@ const AffiliateProgram = () => {
   const {
     toast
   } = useToast();
+  
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     toast({
@@ -25,6 +27,11 @@ const AffiliateProgram = () => {
       description: "Link de afiliado copiado para a área de transferência."
     });
   };
+
+  const handleWithdraw = () => {
+    window.open("https://wa.me/5514998649264?text=Bom%20dia%2C%20Quero%20sacar%20minha%20comiss%C3%A3o!", "_blank");
+  };
+  
   return <div className="space-y-8">
       <div>
         <h2 className="text-2xl font-bold text-gray-800">Programa de Afiliados</h2>
@@ -83,14 +90,21 @@ const AffiliateProgram = () => {
               </div>
             </div>
           </CardContent>
-          
+          <CardFooter className="border-t pt-4">
+            <Button 
+              onClick={handleWithdraw}
+              className="bg-green-500 hover:bg-green-600 text-white font-medium w-full"
+            >
+              <CreditCard className="h-4 w-4 mr-2" />
+              Sacar Comissões
+            </Button>
+          </CardFooter>
         </Card>
       </div>
       
       {/* Marketing Materials */}
       <Card className="shadow-md">
-        
-        
+        {/* ... keep existing code (Marketing Materials card) */}
       </Card>
       
       {/* How To Guide */}
@@ -130,10 +144,9 @@ const AffiliateProgram = () => {
                   <p>Os pagamentos são realizados até o dia 20 de cada mês, referentes às devidas comissões, você vai receber via:</p>
                   <ul className="list-disc list-inside pl-2">
                     <li>Transferência bancária (Pix)</li>
-                    
-                    
                   </ul>
                   <p className="mt-2">Obtenha seu pagamento após 30 dias da compra e entre em contato via suporte para receber!</p>
+                  <p className="mt-2">Ou clique no botão "Sacar Comissões" para solicitar seu pagamento via WhatsApp.</p>
                 </div>
               </AccordionContent>
             </AccordionItem>
@@ -147,4 +160,5 @@ const AffiliateProgram = () => {
       </Card>
     </div>;
 };
+
 export default AffiliateProgram;

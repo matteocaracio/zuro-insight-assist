@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -8,7 +8,8 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
-import { FileText, File, Plus, ArrowRight, Copy } from 'lucide-react';
+import { FileText, File, Plus, ArrowRight, Copy, Trash2, FileEdit } from 'lucide-react';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 
 // Mock data for demonstration
 const mockPatients = [{
@@ -77,9 +78,29 @@ const PatientDatabase = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [aiAnalysis, setAiAnalysis] = useState<string | null>(null);
   const [loadingAI, setLoadingAI] = useState(false);
-  const {
-    toast
-  } = useToast();
+  const [patientNotes, setPatientNotes] = useState("");
+  const [selectedPatientForNotes, setSelectedPatientForNotes] = useState<any>(null);
+  const { toast } = useToast();
+
+  // Function to check and update patient status
+  useEffect(() => {
+    const currentDate = new Date();
+    const updatedPatients = patients.map(patient => {
+      if (patient.status === "Ativo" && patient.lastVisit) {
+        const lastVisitDate = new Date(patient.lastVisit);
+        const monthsDiff = (currentDate.getFullYear() - lastVisitDate.getFullYear()) * 12 + 
+                           (currentDate.getMonth() - lastVisitDate.getMonth());
+        
+        if (monthsDiff >= 3 && !patient.nextVisit) {
+          return { ...patient, status: "Inativo" };
+        }
+      }
+      return patient;
+    });
+    
+    setPatients(updatedPatients);
+  }, []);
+
   const handleSearchCPF = () => {
     const formattedCPF = searchCPF.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
     setSearchCPF(formattedCPF);
@@ -185,7 +206,50 @@ Observações adicionais: Os exames mostram melhora na condição inflamatória,
       });
     }, 3000);
   };
-  const filteredPatients = patients.filter(patient => patient.name.toLowerCase().includes(searchTerm.toLowerCase()) || patient.cpf.includes(searchTerm) || patient.email.toLowerCase().includes(searchTerm.toLowerCase()));
+  const handleOpenNotes = (patient: any) => {
+    setSelectedPatientForNotes(patient);
+    // Check if patient already has consultation notes
+    const patientData = patients.find(p => p.id === patient.id);
+    setPatientNotes(patientData?.consultationNotes || '');
+  };
+
+  const handleSaveNotes = () => {
+    if (!selectedPatientForNotes) return;
+    
+    const updatedPatients = patients.map(p => {
+      if (p.id === selectedPatientForNotes.id) {
+        return { ...p, consultationNotes: patientNotes };
+      }
+      return p;
+    });
+    
+    setPatients(updatedPatients);
+    toast({
+      title: "Notas salvas",
+      description: "As notas de consulta foram salvas com sucesso."
+    });
+  };
+
+  const handleDeletePatient = (patientId: number) => {
+    const updatedPatients = patients.filter(p => p.id !== patientId);
+    setPatients(updatedPatients);
+    
+    // If the deleted patient is the current patient, clear it
+    if (currentPatient && currentPatient.id === patientId) {
+      setCurrentPatient(null);
+    }
+    
+    toast({
+      title: "Paciente excluído",
+      description: "O paciente foi excluído com sucesso."
+    });
+  };
+
+  const filteredPatients = patients.filter(patient => 
+    patient.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    patient.cpf.includes(searchTerm) || 
+    patient.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold text-gray-800">Pacientes</h1>
@@ -377,7 +441,10 @@ Observações adicionais: Os exames mostram melhora na condição inflamatória,
             <CardTitle>Lista de Pacientes</CardTitle>
             <Dialog>
               <DialogTrigger asChild>
-                
+                <Button variant="outline">
+                  <Plus className="h-4 w-4 mr-2" />
+                  Novo Paciente
+                </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
                 <DialogHeader>
@@ -451,9 +518,75 @@ Observações adicionais: Os exames mostram melhora na condição inflamatória,
                         </Badge>
                       </TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="sm" onClick={() => setCurrentPatient(patient)}>
-                          Ver Detalhes
-                        </Button>
+                        <div className="flex justify-end gap-2">
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" size="sm" className="h-8">
+                                <FileEdit className="h-4 w-4 mr-1" />
+                                Ver Notas
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-md">
+                              <DialogHeader>
+                                <DialogTitle>Notas de Consulta - {patient.name}</DialogTitle>
+                                <DialogDescription>
+                                  Anote informações importantes para as próximas consultas.
+                                </DialogDescription>
+                              </DialogHeader>
+                              <Textarea 
+                                value={selectedPatientForNotes?.id === patient.id ? patientNotes : ""} 
+                                onChange={e => setPatientNotes(e.target.value)}
+                                placeholder="Digite suas anotações aqui..."
+                                className="min-h-[200px]"
+                                onClick={() => !selectedPatientForNotes && handleOpenNotes(patient)}
+                              />
+                              <DialogFooter>
+                                <DialogClose asChild>
+                                  <Button variant="outline">Cancelar</Button>
+                                </DialogClose>
+                                <Button 
+                                  className="bg-zuro hover:bg-zuro-dark text-white"
+                                  onClick={() => {
+                                    handleOpenNotes(patient);
+                                    handleSaveNotes();
+                                  }}
+                                >
+                                  Salvar Notas
+                                </Button>
+                              </DialogFooter>
+                            </DialogContent>
+                          </Dialog>
+                          
+                          <Button variant="ghost" size="sm" onClick={() => setCurrentPatient(patient)}>
+                            Ver Detalhes
+                          </Button>
+                          
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button variant="destructive" size="sm" className="h-8">
+                                <Trash2 className="h-4 w-4 mr-1" />
+                                Excluir
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Confirmar exclusão</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  Tem certeza que deseja excluir o paciente {patient.name}? Esta ação não pode ser desfeita.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                                <AlertDialogAction 
+                                  onClick={() => handleDeletePatient(patient.id)}
+                                  className="bg-destructive text-destructive-foreground hover:bg-destructive/80"
+                                >
+                                  Excluir
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                        </div>
                       </TableCell>
                     </TableRow>)}
               </TableBody>
