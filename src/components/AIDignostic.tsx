@@ -83,17 +83,13 @@ const AIRecommendation = () => {
   return <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold text-gray-800">Diagnóstico e Plano Automatizado por IA</h1>
-        <p className="mt-2 text-gray-600">
-          Descreva seus sintomas ou objetivos terapêuticos para receber um plano personalizado gerado por nossa Inteligência Artificial.
-        </p>
+        <p className="mt-2 text-gray-600">Descreva os sintomas e os objetivos para receber direcionamento personalizado gerado por nossa Inteligência Artificial Zuro</p>
       </div>
       
       <Card className="shadow-md border-gray-200">
         <CardHeader>
-          <CardTitle>Seus sintomas ou objetivos</CardTitle>
-          <CardDescription>
-            Quanto mais detalhes você fornecer, mais personalizado será o plano gerado.
-          </CardDescription>
+          <CardTitle>Descreve os sintomas e objetivos</CardTitle>
+          <CardDescription>Quanto mais detalhes você fornecer, melhor ficará!</CardDescription>
         </CardHeader>
         <CardContent>
           <Textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Ex: Tenho sentido dores na região lombar há 3 semanas, principalmente ao me levantar pela manhã. Já tentei alongamentos básicos, mas a dor persiste. Meu objetivo é retornar às atividades normais sem dor e fortalecer a musculatura." className="min-h-[150px] zuro-textarea" />
