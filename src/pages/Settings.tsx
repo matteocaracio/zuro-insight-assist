@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from '@/components/Layout';
 import { useEffect, useState } from 'react';
@@ -9,30 +8,18 @@ import { useToast } from '@/hooks/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Separator } from '@/components/ui/separator';
-
 const Settings = () => {
-  return (
-    <Layout>
+  return <Layout>
       <div className="space-y-8">
         <div className="bg-gradient-to-r from-purple-600 to-purple-400 p-6 rounded-lg shadow-md text-white mb-6">
-          <h1 className="text-3xl font-bold">Configurações</h1>
+          <h1 className="text-3xl font-bold">Programa de Afiliado</h1>
           <p className="mt-2 opacity-90">
             Personalize sua experiência e gerencie suas configurações.
           </p>
         </div>
         
         <Tabs defaultValue="affiliate" className="w-full">
-          <TabsList className="w-full mb-6 grid grid-cols-3 bg-gray-100">
-            <TabsTrigger value="affiliate" className="data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-purple-500">
-              Programa de Afiliados
-            </TabsTrigger>
-            <TabsTrigger value="account" className="data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-purple-500">
-              Conta
-            </TabsTrigger>
-            <TabsTrigger value="notifications" className="data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-purple-500">
-              Notificações
-            </TabsTrigger>
-          </TabsList>
+          
           
           <TabsContent value="affiliate">
             <AffiliateProgram />
@@ -63,10 +50,8 @@ const Settings = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </Layout>
-  );
+    </Layout>;
 };
-
 const AffiliateProgram = () => {
   // Use localStorage for persistent storage of affiliate data
   const [stats, setStats] = useState(() => {
@@ -78,24 +63,22 @@ const AffiliateProgram = () => {
       earnings: 925.00
     };
   });
-  
   const [affiliateLink, setAffiliateLink] = useState(() => {
     const savedLink = localStorage.getItem('affiliateLink');
     return savedLink || `https://zuroagenda.com.br/register?ref=${generateRefCode()}`;
   });
-  
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
 
   // Save affiliate data to localStorage when it changes
   useEffect(() => {
     localStorage.setItem('affiliateStats', JSON.stringify(stats));
     localStorage.setItem('affiliateLink', affiliateLink);
   }, [stats, affiliateLink]);
-
   function generateRefCode() {
     return Math.random().toString(36).substring(2, 10).toUpperCase();
   }
-
   const copyToClipboard = () => {
     navigator.clipboard.writeText(affiliateLink);
     toast({
@@ -103,7 +86,6 @@ const AffiliateProgram = () => {
       description: "Link de afiliado copiado para a área de transferência."
     });
   };
-
   const handleWithdraw = () => {
     window.open("https://wa.me/5514998649264?text=Bom%20dia%2C%20Quero%20sacar%20minha%20comiss%C3%A3o!", "_blank");
   };
@@ -117,7 +99,6 @@ const AffiliateProgram = () => {
         const newSignups = prevStats.signups + (Math.random() > 0.7 ? 1 : 0);
         const newConversion = (newSignups / newClicks * 100).toFixed(1);
         const newEarnings = prevStats.earnings + (Math.random() > 0.8 ? 25 : 0);
-        
         return {
           clicks: newClicks,
           signups: newSignups,
@@ -126,12 +107,10 @@ const AffiliateProgram = () => {
         };
       });
     }, 60000); // Update every minute
-    
+
     return () => clearInterval(interval);
   }, []);
-
-  return (
-    <div className="space-y-6">
+  return <div className="space-y-6">
       <div className="grid gap-6 md:grid-cols-2">
         <Card className="md:col-span-2 shadow-md border-purple-100">
           <CardHeader className="bg-gradient-to-r from-purple-50 to-white border-b">
@@ -143,10 +122,7 @@ const AffiliateProgram = () => {
               <div className="bg-gray-50 p-3 rounded-md border border-gray-200 flex-grow font-mono text-sm overflow-auto">
                 {affiliateLink}
               </div>
-              <Button 
-                onClick={copyToClipboard} 
-                className="bg-purple-600 hover:bg-purple-700 text-white whitespace-nowrap"
-              >
+              <Button onClick={copyToClipboard} className="bg-purple-600 hover:bg-purple-700 text-white whitespace-nowrap">
                 <Copy className="h-4 w-4 mr-2" /> Copiar Link
               </Button>
             </div>
@@ -192,15 +168,10 @@ const AffiliateProgram = () => {
                   <h3 className="font-medium">Saldo Disponível</h3>
                   <span className="text-2xl font-bold text-purple-700">R$ {stats.earnings.toFixed(2)}</span>
                 </div>
-                <Button 
-                  className="w-full bg-green-600 hover:bg-green-700 text-white mt-2"
-                  onClick={handleWithdraw}
-                >
+                <Button className="w-full bg-green-600 hover:bg-green-700 text-white mt-2" onClick={handleWithdraw}>
                   <Wallet className="h-4 w-4 mr-2" /> Sacar Comissão
                 </Button>
-                <p className="text-xs text-gray-500 mt-2">
-                  O pagamento é processado em até 5 dias úteis após a solicitação.
-                </p>
+                <p className="text-xs text-gray-500 mt-2">O pagamento é processado em até o dia 20 após a solicitação.</p>
               </div>
             </div>
           </CardContent>
@@ -221,9 +192,7 @@ const AffiliateProgram = () => {
                   <li className="pl-2">
                     Copie seu link exclusivo de afiliado
                   </li>
-                  <li className="pl-2">
-                    Compartilhe com profissionais de saúde que possam se beneficiar da ZuroAgenda
-                  </li>
+                  <li className="pl-2">Compartilhe com profissionais de saúde que possam se beneficiar da Zuro Agenda</li>
                   <li className="pl-2">
                     Quando alguém se cadastrar usando seu link, você receberá uma comissão
                   </li>
@@ -305,8 +274,6 @@ const AffiliateProgram = () => {
           </div>
         </CardFooter>
       </Card>
-    </div>
-  );
+    </div>;
 };
-
 export default Settings;
