@@ -5,7 +5,12 @@ export namespace AITypes {
     | 'nutritionist' 
     | 'psychologist' 
     | 'physician' 
-    | 'dentist';
+    | 'dentist'
+    | 'speech_therapist'  // Fonoaudiólogo
+    | 'occupational_therapist'  // Terapeuta Ocupacional
+    | 'pediatrician'  // Pediatra
+    | 'geriatrician'  // Geriatra
+    | 'orthopedist';  // Ortopedista
 
   export interface NutritionPlan {
     meals: {

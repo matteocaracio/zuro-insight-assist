@@ -34,6 +34,16 @@ export const AIInputForm: React.FC<AIInputFormProps> = ({
         return "Ex: Paciente de 52 anos, com pressão arterial de 148/94 mmHg em medições repetidas. IMC 28, sedentário, histórico familiar de hipertensão. Sem outras comorbidades conhecidas.";
       case 'dentist':
         return "Ex: Paciente de 42 anos com sangramento gengival durante escovação, sensibilidade ao frio e quente, última visita ao dentista há 3 anos. Escova os dentes 2x ao dia, não usa fio dental.";
+      case 'speech_therapist':
+        return "Ex: Paciente de 34 anos com queixa de rouquidão persistente há 3 meses, dificuldade em articular alguns fonemas e cansaço vocal após uso prolongado da voz. É professor e usa a voz profissionalmente por 6 horas diárias.";
+      case 'occupational_therapist':
+        return "Ex: Paciente de 45 anos com sequela de AVC, apresentando hemiparesia à direita, com dificuldades nas atividades de vida diária como vestir-se, alimentar-se e realizar higiene pessoal. Objetivo: recuperar independência funcional.";
+      case 'pediatrician':
+        return "Ex: Criança de 4 anos com episódios recorrentes de infecção respiratória (5 nos últimos 12 meses), baixo ganho de peso (percentil 5) e seletividade alimentar. Desenvolvimento neuropsicomotor adequado para a idade.";
+      case 'geriatrician':
+        return "Ex: Paciente de 78 anos com perda de peso não intencional, diminuição de força, fadiga, polifarmácia (7 medicamentos diários) e histórico de 2 quedas nos últimos 3 meses sem fraturas.";
+      case 'orthopedist':
+        return "Ex: Paciente de 58 anos com dor no joelho há 8 meses, pior ao subir escadas, rigidez matinal por 20 minutos, crepitação e limitação de movimento. Radiografia mostra redução do espaço articular medial.";
       default: // physio
         return "Ex: Paciente com dor lombar há 3 semanas, principalmente ao se levantar pela manhã. Trabalha 8h por dia sentado. Já tentou alongamentos básicos, mas a dor persiste. Objetivo: retornar às atividades normais e prevenir recorrência.";
     }
@@ -58,6 +68,11 @@ export const AIInputForm: React.FC<AIInputFormProps> = ({
               <SelectItem value="psychologist">Psicologia</SelectItem>
               <SelectItem value="physician">Medicina</SelectItem>
               <SelectItem value="dentist">Odontologia</SelectItem>
+              <SelectItem value="speech_therapist">Fonoaudiologia</SelectItem>
+              <SelectItem value="occupational_therapist">Terapia Ocupacional</SelectItem>
+              <SelectItem value="pediatrician">Pediatria</SelectItem>
+              <SelectItem value="geriatrician">Geriatria</SelectItem>
+              <SelectItem value="orthopedist">Ortopedia</SelectItem>
             </SelectContent>
           </Select>
         </div>

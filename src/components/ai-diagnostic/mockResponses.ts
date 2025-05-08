@@ -1,4 +1,3 @@
-
 import { AITypes } from './types';
 
 export const generateMockResponse = (profession: AITypes.ProfessionType, userInput: string): AITypes.AIResult => {
@@ -124,6 +123,116 @@ export const generateMockResponse = (profession: AITypes.ProfessionType, userInp
           "American Academy of Periodontology - Classification of Periodontal and Peri-Implant Diseases and Conditions, 2023",
           "Sociedade Brasileira de Periodontologia - Diretrizes para tratamento da doença periodontal, 2022",
           "Journal of Clinical Periodontology - Effectiveness of non-surgical periodontal therapy: A systematic review, 2021"
+        ]
+      };
+      
+    case 'speech_therapist':
+      return {
+        contextAnalysis: "O paciente apresenta alterações na fala caracterizadas por distorções nos fonemas sibilantes (/s/, /z/, /ch/), com comprometimento moderado da inteligibilidade em situações comunicativas complexas. Há também queixas de desconforto durante fala prolongada e episódios de rouquidão após uso vocal intenso.",
+        recommendations: "Recomendo um programa terapêutico focado na adequação dos pontos articulatórios dos fonemas alterados, associado a técnicas de conscientização e propriocepção dos órgãos fonoarticulatórios. Orientações para higiene vocal e exercícios para fortalecimento da musculatura orofacial são necessários. Sugiro também uma avaliação instrumental da qualidade vocal para descartar possíveis alterações estruturais nas pregas vocais.",
+        resources: [
+          { title: "Guia de exercícios articulatórios", type: "PDF", url: "#" },
+          { title: "Orientações de higiene vocal", type: "Vídeo", url: "#" },
+          { title: "Aplicativo de feedback visual para articulação", type: "App", url: "#" }
+        ],
+        plan: [
+          { day: 1, activities: ["Avaliação fonoaudiológica completa", "Anamnese detalhada", "Análise de amostra de fala"] },
+          { day: 7, activities: ["Exercícios de propriocepção articulatória", "Técnicas de conscientização dos pontos articulatórios", "Início de terapia miofuncional"] },
+          { day: 15, activities: ["Introdução de exercícios para adequação de tensão vocal", "Prática contextualizada dos fonemas-alvo", "Feedback auditivo e visual"] },
+          { day: 30, activities: ["Reavaliação da produção articulatória", "Ajustes terapêuticos", "Plano de manutenção e generalização"] }
+        ],
+        references: [
+          "American Speech-Language-Hearing Association - Practice Portal: Speech Sound Disorders, 2023",
+          "Sociedade Brasileira de Fonoaudiologia - Diretrizes Clínicas para Distúrbios Articulatórios, 2022",
+          "Journal of Speech, Language, and Hearing Research - Efficacy of speech therapy for phonological disorders, 2021"
+        ]
+      };
+      
+    case 'occupational_therapist':
+      return {
+        contextAnalysis: "O paciente apresenta limitações funcionais nas atividades de vida diária (AVDs) resultantes de lesão do plexo braquial, com comprometimento moderado da função do membro superior direito. Há dificuldades na preensão de objetos, coordenação motora fina e atividades que exigem amplitude de movimento completa, impactando sua independência e participação ocupacional.",
+        recommendations: "Recomendo um programa de reabilitação com foco na recuperação funcional através de atividades graduadas, adaptações ambientais e uso de tecnologia assistiva conforme necessidade. É importante trabalhar com objetivos centrados no paciente, priorizando as ocupações significativas para ele. Sugiro treinamento específico para AVDs com estratégias adaptativas, exercícios de fortalecimento e técnicas de conservação de energia.",
+        resources: [
+          { title: "Guia de adaptações para AVDs", type: "PDF", url: "#" },
+          { title: "Exercícios para melhora de destreza manual", type: "Vídeo", url: "#" },
+          { title: "Catálogo de dispositivos assistivos para alimentação e higiene", type: "Artigo", url: "#" }
+        ],
+        plan: [
+          { day: 1, activities: ["Avaliação ocupacional completa", "Estabelecimento de metas funcionais", "Identificação de barreiras e facilitadores"] },
+          { day: 7, activities: ["Introdução às técnicas de controle motor", "Adaptação de utensílios para alimentação", "Orientações para modificações domiciliares"] },
+          { day: 15, activities: ["Treinamento em atividades de autocuidado", "Introdução de exercícios ocupacionais terapêuticos", "Avaliação da necessidade de órteses"] },
+          { day: 30, activities: ["Reavaliação funcional", "Ajustes nas adaptações", "Progressão para atividades instrumentais de vida diária"] }
+        ],
+        references: [
+          "American Occupational Therapy Association - Occupational Therapy Practice Framework, 2023",
+          "Revista Brasileira de Terapia Ocupacional - Intervenções para lesões do plexo braquial, 2022",
+          "Canadian Journal of Occupational Therapy - Evidence for activity-based approaches in upper limb rehabilitation, 2021"
+        ]
+      };
+      
+    case 'pediatrician':
+      return {
+        contextAnalysis: "A criança de 4 anos apresenta padrão de crescimento abaixo do esperado (percentil 5 para peso e percentil 10 para altura), com histórico de infecções respiratórias recorrentes (5 episódios nos últimos 12 meses) e dificuldades alimentares caracterizadas por seletividade pronunciada. O desenvolvimento neuropsicomotor está adequado para a idade, porém há relatos de fadiga excessiva durante atividades rotineiras.",
+        recommendations: "Recomendo investigação laboratorial incluindo hemograma completo, dosagem de ferritina, vitaminas A, D e B12, função tireoidiana, além de avaliação imunológica básica. É necessária abordagem multidisciplinar com acompanhamento nutricional para manejo da seletividade alimentar e fonoaudiológico para avaliação da deglutição. Sugiro também calendário vacinal completo com inclusão de imunobiológicos especiais como pneumocócica 23-valente e influenza anual.",
+        resources: [
+          { title: "Guia alimentar para crianças com seletividade", type: "PDF", url: "#" },
+          { title: "Técnicas lúdicas para introdução alimentar", type: "Vídeo", url: "#" },
+          { title: "Orientações para prevenção de infecções respiratórias", type: "Artigo", url: "#" }
+        ],
+        plan: [
+          { day: 1, activities: ["Avaliação pediátrica completa", "Solicitação de exames", "Orientações iniciais para família"] },
+          { day: 10, activities: ["Análise dos resultados laboratoriais", "Elaboração de plano terapêutico", "Encaminhamentos multidisciplinares"] },
+          { day: 30, activities: ["Reavaliação antropométrica", "Verificação da adesão às orientações", "Ajustes nas recomendações nutricionais"] },
+          { day: 90, activities: ["Avaliação completa do crescimento e desenvolvimento", "Revisão da frequência de infecções", "Planejamento para seguimento trimestral"] }
+        ],
+        references: [
+          "American Academy of Pediatrics - Clinical Practice Guideline for Failure to Thrive, 2023",
+          "Sociedade Brasileira de Pediatria - Consenso sobre Infecções Respiratórias Recorrentes, 2022",
+          "Journal of Pediatrics - Management of feeding difficulties in preschool children, 2021"
+        ]
+      };
+      
+    case 'geriatrician':
+      return {
+        contextAnalysis: "O paciente idoso de 78 anos apresenta síndrome de fragilidade em estágio inicial, caracterizada por perda de peso não intencional (5% nos últimos 6 meses), diminuição da força de preensão palmar e autorrelato de fadiga. Há também presença de polifarmácia (uso de 7 medicamentos diários), incluindo psicotrópicos, e episódios recorrentes de quedas (2 nos últimos 3 meses), sem fraturas.",
+        recommendations: "Recomendo revisão completa da medicação com desprescrição de fármacos potencialmente inapropriados para idosos, seguindo os critérios de Beers. É essencial a implementação de um programa de exercícios multimodal focado em fortalecimento muscular, equilíbrio e capacidade aeróbica, adaptado às condições do paciente. Avaliação nutricional detalhada com suplementação proteica e calórica conforme necessidade. Intervenção ambiental para redução de riscos domiciliares de queda também é prioritária.",
+        resources: [
+          { title: "Guia de exercícios para idosos frágeis", type: "PDF", url: "#" },
+          { title: "Checklist de segurança domiciliar", type: "PDF", url: "#" },
+          { title: "Orientações para alimentação enriquecida", type: "Vídeo", url: "#" }
+        ],
+        plan: [
+          { day: 1, activities: ["Avaliação geriátrica ampla", "Revisão farmacoterapêutica", "Aplicação de escalas de fragilidade"] },
+          { day: 15, activities: ["Início do programa de exercícios supervisionados", "Orientação nutricional", "Avaliação domiciliar para prevenção de quedas"] },
+          { day: 30, activities: ["Reavaliação da força muscular e equilíbrio", "Ajustes na suplementação nutricional", "Monitoramento da adesão às modificações medicamentosas"] },
+          { day: 90, activities: ["Avaliação completa da evolução da fragilidade", "Progressão do programa de exercícios", "Revisão da ocorrência de eventos adversos"] }
+        ],
+        references: [
+          "American Geriatrics Society - Updated Beers Criteria for Potentially Inappropriate Medication Use in Older Adults, 2023",
+          "Sociedade Brasileira de Geriatria e Gerontologia - Diretrizes em Fragilidade, 2022",
+          "Journal of the American Medical Directors Association - Multimodal interventions for frailty prevention, 2021"
+        ]
+      };
+      
+    case 'orthopedist':
+      return {
+        contextAnalysis: "O paciente apresenta quadro de osteoartrite de joelho grau II-III (classificação de Kellgren-Lawrence), com sintomas predominantes em compartimento medial, dor de intensidade moderada (EVA 6/10), rigidez matinal de aproximadamente 20 minutos e limitação funcional para subir escadas e agachar. Exame físico evidencia crepitação, discreto derrame articular e redução de 20° na flexão máxima.",
+        recommendations: "Recomendo abordagem multimodal incluindo controle ponderal, fisioterapia focada em fortalecimento muscular (principalmente quadríceps e isquiotibiais) e propriocepção, além de analgesia com acetaminofeno e anti-inflamatórios não esteroidais em períodos curtos conforme necessidade. Em casos de exacerbação da dor, infiltração intra-articular com corticosteroides pode ser considerada, limitada a 3-4 aplicações anuais. Recomendo também uso de órtese de descompressão do compartimento medial para atividades prolongadas.",
+        resources: [
+          { title: "Programa de exercícios para osteoartrite de joelho", type: "PDF", url: "#" },
+          { title: "Técnicas de proteção articular nas atividades diárias", type: "Vídeo", url: "#" },
+          { title: "Guia para controle de peso em pacientes com artrose", type: "Artigo", url: "#" }
+        ],
+        plan: [
+          { day: 1, activities: ["Avaliação ortopédica completa", "Radiografias funcionais", "Prescrição inicial de exercícios e medicação"] },
+          { day: 15, activities: ["Revisão da resposta à terapia inicial", "Ajustes na prescrição de exercícios", "Avaliação da necessidade de órteses"] },
+          { day: 45, activities: ["Reavaliação funcional", "Progressão do programa de exercícios", "Consideração de terapias complementares"] },
+          { day: 90, activities: ["Avaliação comparativa com estado inicial", "Planejamento terapêutico de longo prazo", "Discussão sobre prognóstico e opções futuras"] }
+        ],
+        references: [
+          "American Academy of Orthopedic Surgeons - Clinical Practice Guideline on Treatment of Osteoarthritis of the Knee, 2023",
+          "Sociedade Brasileira de Ortopedia e Traumatologia - Diretrizes para tratamento da osteoartrite, 2022",
+          "Osteoarthritis and Cartilage - OARSI guidelines for non-surgical management of knee osteoarthritis, 2021"
         ]
       };
       
