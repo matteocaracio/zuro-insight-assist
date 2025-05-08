@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, FileText } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AITypes } from './types';
 
@@ -13,7 +13,6 @@ interface AIInputFormProps {
   profession: AITypes.ProfessionType;
   setProfession: React.Dispatch<React.SetStateAction<AITypes.ProfessionType>>;
   onGenerate: () => void;
-  onHistoryClick: () => void;
   loading: boolean;
 }
 
@@ -23,7 +22,6 @@ export const AIInputForm: React.FC<AIInputFormProps> = ({
   profession,
   setProfession,
   onGenerate,
-  onHistoryClick,
   loading
 }) => {
   const getPlaceholderText = () => {
@@ -72,16 +70,7 @@ export const AIInputForm: React.FC<AIInputFormProps> = ({
         />
       </CardContent>
       <CardFooter>
-        <div className="flex w-full justify-between">
-          <Button
-            variant="outline"
-            onClick={onHistoryClick}
-            className="flex items-center gap-2"
-          >
-            <FileText className="h-4 w-4" />
-            Histórico
-          </Button>
-          
+        <div className="flex w-full justify-end">
           <Button 
             onClick={onGenerate} 
             disabled={loading} 

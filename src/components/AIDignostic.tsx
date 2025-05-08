@@ -1,28 +1,13 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
-import { 
-  ArrowRight, 
-  Copy, 
-  BookText, 
-  FileText, 
-  ChartLine, 
-  FileSearch,
-  Brain, 
-  UserMinus, 
-  FileCheck 
-} from 'lucide-react';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { FileText } from 'lucide-react';
 import { AIResultPanel } from './ai-diagnostic/AIResultPanel';
 import { AIInputForm } from './ai-diagnostic/AIInputForm';
 import { AITypes } from './ai-diagnostic/types';
 import { generateMockResponse } from './ai-diagnostic/mockResponses';
+import { HistoryDialog } from './ai-diagnostic/HistoryDialog';
 
 const AIRecommendation = () => {
   const [input, setInput] = useState('');
@@ -62,6 +47,11 @@ const AIRecommendation = () => {
         localStorage.setItem('aiDiagnoses', JSON.stringify(savedDiagnoses));
         
         setLoading(false);
+        
+        toast({
+          title: "Diagnóstico gerado",
+          description: "O diagnóstico foi salvo no histórico."
+        });
       }, 2000);
     } catch (error) {
       console.error('Error generating AI recommendation:', error);
@@ -74,19 +64,15 @@ const AIRecommendation = () => {
     }
   };
 
-  const handleHistoryDialog = () => {
-    const savedDiagnoses = JSON.parse(localStorage.getItem('aiDiagnoses') || '[]');
-    if (savedDiagnoses.length > 0) {
-      toast({
-        title: "Histórico disponível",
-        description: `Você tem ${savedDiagnoses.length} diagnósticos salvos.`
-      });
-    } else {
-      toast({
-        title: "Nenhum histórico",
-        description: "Você ainda não gerou nenhum diagnóstico."
-      });
-    }
+  const handleLoadHistory = (historyItem: AITypes.DiagnosisHistory) => {
+    setInput(historyItem.input);
+    setProfession(historyItem.profession);
+    setResults(historyItem.result);
+    
+    toast({
+      title: "Diagnóstico carregado",
+      description: "Um diagnóstico anterior foi carregado com sucesso."
+    });
   };
 
   return (
@@ -98,13 +84,27 @@ const AIRecommendation = () => {
         </p>
       </div>
       
+      <div className="flex justify-end">
+        <HistoryDialog 
+          trigger={
+            <Button
+              variant="outline"
+              className="flex items-center gap-2"
+            >
+              <FileText className="h-4 w-4" />
+              Histórico
+            </Button>
+          }
+          onSelectDiagnosis={handleLoadHistory}
+        />
+      </div>
+      
       <AIInputForm
         input={input}
         setInput={setInput}
         profession={profession}
         setProfession={setProfession}
         onGenerate={handleGeneratePlan}
-        onHistoryClick={handleHistoryDialog}
         loading={loading}
       />
 

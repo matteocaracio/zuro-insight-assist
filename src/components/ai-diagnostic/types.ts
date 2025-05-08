@@ -31,4 +31,12 @@ export namespace AITypes {
     nutritionPlan?: NutritionPlan;
     references?: string[];
   }
+
+  export interface DiagnosisHistory {
+    id: number;
+    date: string;
+    profession: ProfessionType;
+    input: string;
+    result: AIResult;
+  }
 }
