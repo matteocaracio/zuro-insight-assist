@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
@@ -23,10 +23,30 @@ const PatientNotes: React.FC<PatientNotesProps> = ({
   handleSaveNotes,
   selectedPatientForNotes
 }) => {
+  const [open, setOpen] = useState(false);
+  const [localNotes, setLocalNotes] = useState("");
+
+  useEffect(() => {
+    if (open && selectedPatientForNotes?.id === patient.id) {
+      setLocalNotes(patientNotes);
+    }
+  }, [open, selectedPatientForNotes, patient.id, patientNotes]);
+
+  const handleOpen = () => {
+    handleOpenNotes(patient);
+    setOpen(true);
+  };
+
+  const handleSave = () => {
+    setPatientNotes(localNotes);
+    handleSaveNotes();
+    setOpen(false);
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" onClick={handleOpen}>
           <FileText className="h-4 w-4 mr-1" />
           Notas de Consulta
         </Button>
@@ -39,11 +59,10 @@ const PatientNotes: React.FC<PatientNotesProps> = ({
           </DialogDescription>
         </DialogHeader>
         <Textarea 
-          value={selectedPatientForNotes?.id === patient.id ? patientNotes : ""} 
-          onChange={e => setPatientNotes(e.target.value)} 
+          value={localNotes} 
+          onChange={e => setLocalNotes(e.target.value)} 
           placeholder="Digite suas anotações aqui..." 
           className="min-h-[200px]" 
-          onClick={() => !selectedPatientForNotes && handleOpenNotes(patient)} 
         />
         <DialogFooter>
           <DialogClose asChild>
@@ -51,10 +70,7 @@ const PatientNotes: React.FC<PatientNotesProps> = ({
           </DialogClose>
           <Button 
             className="bg-purple-600 hover:bg-purple-700 text-white" 
-            onClick={() => {
-              handleOpenNotes(patient);
-              handleSaveNotes();
-            }}
+            onClick={handleSave}
           >
             Salvar Notas
           </Button>
