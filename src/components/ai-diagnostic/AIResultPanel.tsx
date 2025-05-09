@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Copy, BookText, FileText, ChartLine, FileSearch, Brain, FileCheck } from 'lucide-react';
+import { Copy, FileText, Brain } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { AITypes } from './types';
 import { NutritionPlanTab } from './tabs/NutritionPlanTab';

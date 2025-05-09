@@ -6,7 +6,7 @@ import PatientSearch from './PatientSearch';
 import PatientDetails from './PatientDetails';
 import PatientsList from './PatientsList';
 import { Patient } from './types';
-import { initialPatients, formatCPF, formatPhone } from './utils';
+import { initialPatients, formatCPF } from './utils';
 
 const PatientDatabase = () => {
   // Use localStorage for persistent storage
@@ -22,12 +22,6 @@ const PatientDatabase = () => {
   const [loadingAI, setLoadingAI] = useState(false);
   const [patientNotes, setPatientNotes] = useState("");
   const [selectedPatientForNotes, setSelectedPatientForNotes] = useState<Patient | null>(null);
-  const [newPatient, setNewPatient] = useState({
-    name: "",
-    cpf: "",
-    email: "",
-    phone: ""
-  });
   const { toast } = useToast();
 
   // Save patients to localStorage whenever it changes
@@ -182,54 +176,6 @@ Observações adicionais: Os exames mostram melhora na condição inflamatória,
     });
   };
 
-  const handleAddPatient = () => {
-    if (!newPatient.name || !newPatient.cpf || !newPatient.email || !newPatient.phone) {
-      toast({
-        title: "Dados incompletos",
-        description: "Preencha todos os campos obrigatórios.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    // Check if CPF already exists
-    if (patients.some(p => p.cpf === newPatient.cpf)) {
-      toast({
-        title: "CPF já cadastrado",
-        description: "Este CPF já está vinculado a outro paciente.",
-        variant: "destructive"
-      });
-      return;
-    }
-    const newPatientObj: Patient = {
-      id: Math.max(0, ...patients.map(p => p.id)) + 1,
-      name: newPatient.name,
-      cpf: formatCPF(newPatient.cpf),
-      phone: formatPhone(newPatient.phone),
-      email: newPatient.email,
-      lastVisit: null,
-      nextVisit: null,
-      status: "Ativo",
-      notes: [],
-      files: [],
-      consultationNotes: ""
-    };
-    setPatients([...patients, newPatientObj]);
-
-    // Reset form
-    setNewPatient({
-      name: "",
-      cpf: "",
-      email: "",
-      phone: ""
-    });
-    toast({
-      title: "Paciente cadastrado",
-      description: `${newPatient.name} foi adicionado com sucesso.`,
-      variant: "default"
-    });
-  };
-
   const filteredPatients = patients.filter(patient => 
     patient.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
     patient.cpf.includes(searchTerm) || 
@@ -267,9 +213,6 @@ Observações adicionais: Os exames mostram melhora na condição inflamatória,
         setSearchTerm={setSearchTerm}
         setCurrentPatient={setCurrentPatient}
         handleDeletePatient={handleDeletePatient}
-        newPatient={newPatient}
-        setNewPatient={setNewPatient}
-        handleAddPatient={handleAddPatient}
         patientNotes={patientNotes}
         setPatientNotes={setPatientNotes}
         handleOpenNotes={handleOpenNotes}

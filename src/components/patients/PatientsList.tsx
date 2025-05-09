@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Search, Trash2 } from 'lucide-react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
-import AddPatientDialog from './AddPatientDialog';
 import PatientNotes from './PatientNotes';
 import { Patient } from './types';
 
@@ -18,19 +17,6 @@ interface PatientsListProps {
   setSearchTerm: (term: string) => void;
   setCurrentPatient: (patient: Patient | null) => void;
   handleDeletePatient: (id: number) => void;
-  newPatient: {
-    name: string;
-    cpf: string;
-    email: string;
-    phone: string;
-  };
-  setNewPatient: (patient: {
-    name: string;
-    cpf: string;
-    email: string;
-    phone: string;
-  }) => void;
-  handleAddPatient: () => void;
   patientNotes: string;
   setPatientNotes: (notes: string) => void;
   handleOpenNotes: (patient: Patient) => void;
@@ -45,9 +31,6 @@ const PatientsList: React.FC<PatientsListProps> = ({
   setSearchTerm,
   setCurrentPatient,
   handleDeletePatient,
-  newPatient,
-  setNewPatient,
-  handleAddPatient,
   patientNotes,
   setPatientNotes,
   handleOpenNotes,
@@ -59,11 +42,6 @@ const PatientsList: React.FC<PatientsListProps> = ({
       <CardHeader className="bg-gradient-to-r from-purple-50 to-white border-b">
         <div className="flex items-center justify-between">
           <CardTitle className="text-purple-800">Lista de Pacientes</CardTitle>
-          <AddPatientDialog 
-            newPatient={newPatient}
-            setNewPatient={setNewPatient}
-            handleAddPatient={handleAddPatient}
-          />
         </div>
       </CardHeader>
       <CardContent className="p-6">
