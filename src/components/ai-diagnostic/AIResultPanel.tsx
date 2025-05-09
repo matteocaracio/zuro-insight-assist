@@ -8,7 +8,6 @@ import { Copy, BookText, FileText, ChartLine, FileSearch, Brain, FileCheck } fro
 import { useToast } from '@/hooks/use-toast';
 import { AITypes } from './types';
 import { NutritionPlanTab } from './tabs/NutritionPlanTab';
-import { ResourcesTab } from './tabs/ResourcesTab';
 import { TreatmentPlanTab } from './tabs/TreatmentPlanTab';
 import { ReferencesTab } from './tabs/ReferencesTab';
 import { ContextAnalysisTab } from './tabs/ContextAnalysisTab';
@@ -42,7 +41,6 @@ export const AIResultPanel: React.FC<AIResultPanelProps> = ({ results, professio
           )}
           
           <TabsTrigger value="plan">Plano de Tratamento</TabsTrigger>
-          <TabsTrigger value="resources">Recursos</TabsTrigger>
           <TabsTrigger value="references">Referências</TabsTrigger>
         </TabsList>
         
@@ -72,10 +70,6 @@ export const AIResultPanel: React.FC<AIResultPanelProps> = ({ results, professio
             />
           </TabsContent>
         )}
-        
-        <TabsContent value="resources">
-          <ResourcesTab resources={results.resources} />
-        </TabsContent>
         
         <TabsContent value="plan">
           <TreatmentPlanTab 
