@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Search, Trash2 } from 'lucide-react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
-import PatientNotes from './PatientNotes';
 import { Patient } from './types';
 
 interface PatientsListProps {
@@ -95,15 +94,6 @@ const PatientsList: React.FC<PatientsListProps> = ({
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
-                        <PatientNotes 
-                          patient={patient}
-                          patientNotes={patientNotes}
-                          setPatientNotes={setPatientNotes}
-                          handleOpenNotes={handleOpenNotes}
-                          handleSaveNotes={handleSaveNotes}
-                          selectedPatientForNotes={selectedPatientForNotes}
-                        />
-                        
                         <Button variant="ghost" size="sm" onClick={() => setCurrentPatient(patient)}>
                           Ver Detalhes
                         </Button>

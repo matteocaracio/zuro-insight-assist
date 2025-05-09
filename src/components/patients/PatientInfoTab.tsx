@@ -23,10 +23,6 @@ const PatientInfoTab: React.FC<PatientInfoTabProps> = ({ patient }) => {
           <p className="text-sm font-medium text-gray-500">Última Consulta</p>
           <p className="font-medium">{patient.lastVisit || "N/A"}</p>
         </div>
-        <div className="space-y-2">
-          <p className="text-sm font-medium text-gray-500">Próxima Consulta</p>
-          <p className="font-medium">{patient.nextVisit || "Não agendada"}</p>
-        </div>
       </div>
     </TabsContent>
   );
